@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         binding.adapter = MemoAdapter()
         binding.items = emptyList<Memo>()
 
-
         setContentView(binding.root)
 
 
