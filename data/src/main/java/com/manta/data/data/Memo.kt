@@ -1,4 +1,4 @@
-package com.manta.domain.entity
+package com.manta.data.data
 
 import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.DiffUtil

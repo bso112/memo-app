@@ -1,7 +1,10 @@
 package com.manta.domain.usecase
 
-import android.app.Application
+import com.manta.domain.repository.Repository
+import javax.inject.Inject
 
-class memoUsecase @Inject constructor(repo : MainRepository) {
+class memoUsecase @Inject constructor(repo : Repository) {
+
+
 
 }

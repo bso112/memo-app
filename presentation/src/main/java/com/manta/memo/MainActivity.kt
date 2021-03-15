@@ -2,7 +2,7 @@ package com.manta.memo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.manta.domain.entity.Memo
+import com.manta.data.data.Memo
 import com.manta.memo.databinding.ActivityMainBinding
 
 

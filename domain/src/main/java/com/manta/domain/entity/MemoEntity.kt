@@ -1,12 +1,12 @@
-package com.manta.data.table
+package com.manta.domain.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.jetbrains.annotations.PropertyKey
 
-@Entity
-data class MemoTable (
+@Entity(tableName = "memo")
+data class MemoEntity (
     @PrimaryKey val uid : Int,
     @ColumnInfo(name = "content") val content : String  = ""
 )

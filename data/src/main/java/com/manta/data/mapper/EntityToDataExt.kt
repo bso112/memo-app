@@ -1,6 +1,6 @@
 package com.manta.data.mapper
 
-import com.manta.data.table.MemoTable
-import com.manta.domain.entity.Memo
+import com.manta.domain.entity.MemoEntity
+import com.manta.data.data.Memo
 
-fun MemoTable.toMemo() = Memo(this.content)
+fun MemoEntity.toMemo() = Memo(this.content)
