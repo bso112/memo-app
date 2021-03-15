@@ -1,4 +1,4 @@
-package com.manta.memo
+package com.manta.memo.presentation.memo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -36,9 +36,15 @@ class MemoAdapter : ListAdapter<Memo, AppViewHolder<Memo>>(Memo.diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder<Memo> {
         return when (viewType) {
-            TYPE_FOLDER -> FolderViewHolder(FolderItemBinding.inflate(LayoutInflater.from(parent.context)))
-            TYPE_MEMO -> MemoViewHolder(MemoItemBinding.inflate(LayoutInflater.from(parent.context)))
-            else -> FolderViewHolder(FolderItemBinding.inflate(LayoutInflater.from(parent.context)))
+            TYPE_FOLDER -> FolderViewHolder(
+                FolderItemBinding.inflate(LayoutInflater.from(parent.context))
+            )
+            TYPE_MEMO -> MemoViewHolder(
+                MemoItemBinding.inflate(LayoutInflater.from(parent.context))
+            )
+            else -> FolderViewHolder(
+                FolderItemBinding.inflate(LayoutInflater.from(parent.context))
+            )
         }
     }
 

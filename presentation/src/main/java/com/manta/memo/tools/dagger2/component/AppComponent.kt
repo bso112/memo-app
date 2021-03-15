@@ -3,6 +3,7 @@ package com.manta.memo.tools.dagger2.component
 import android.app.Application
 import com.manta.memo.App
 import com.manta.memo.tools.dagger2.module.AppModule
+import com.manta.memo.tools.dagger2.module.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -12,7 +13,8 @@ import javax.inject.Singleton
 @Singleton
 @Component( modules = [
     AndroidInjectionModule::class,
-    AppModule::class
+    AppModule::class,
+    ViewModelFactoryModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
 

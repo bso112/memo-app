@@ -58,6 +58,9 @@ dependencies {
     implementation room_ktx
     testImplementation room_testing
 
+    //kotlin ext
+    implementation 'androidx.activity:activity-ktx:1.2.1'
+    implementation 'androidx.fragment:fragment-ktx:1.3.0'
 
     implementation project(":data")
     implementation project(":domain")

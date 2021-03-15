@@ -7,6 +7,6 @@ import org.jetbrains.annotations.PropertyKey
 
 @Entity(tableName = "memo")
 data class MemoEntity (
-    @PrimaryKey val uid : Int,
+    @PrimaryKey(autoGenerate = true) val uid : Int,
     @ColumnInfo(name = "content") val content : String  = ""
 )

@@ -2,7 +2,7 @@ package com.manta.memo.binding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.manta.memo.AppAdapter
+import com.manta.memo.tools.app.AppAdapter
 
 object RecyclerVIewBindings {
 
