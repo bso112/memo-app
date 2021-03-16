@@ -1,4 +1,4 @@
-package com.manta.data.data
+package com.manta.memo.data
 
 import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.DiffUtil

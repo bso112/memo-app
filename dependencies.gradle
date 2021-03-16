@@ -1,6 +1,5 @@
 ext {
 
-
     dagger_version = "2.28.3"
     dagger =                    "com.google.dagger:dagger:$dagger_version"
     daggerAndroidSupport =      "com.google.dagger:dagger-android-support:$dagger_version"
@@ -8,8 +7,12 @@ ext {
     daggerAndroidProcessor =    "com.google.dagger:dagger-android-processor:$dagger_version"
 
     room_version = "2.2.6"
-    //room
-//    implementation "androidx.room:room-runtime:$room_version"
+    room_runtime = "androidx.room:room-runtime:$room_version"
+    room_complier = "androidx.room:room-compiler:$room_version"
+    room_ktx = "androidx.room:room-ktx:$room_version"
+    room_testing = "androidx.room:room-testing:$room_version"
+
+//     "androidx.room:room-runtime:$room_version"
 //    kapt "androidx.room:room-compiler:$room_version"
 //    implementation "androidx.room:room-ktx:$room_version"
 //    testImplementation "androidx.room:room-testing:$room_version"

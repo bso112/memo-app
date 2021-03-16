@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.manta.domain.entity.MemoEntity
-import java.util.*
 
 @Dao
 interface MemoDao {

@@ -3,7 +3,7 @@ package com.manta.memo.presentation.memo
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.manta.data.data.Memo
+import com.manta.memo.data.Memo
 import com.manta.memo.databinding.FolderItemBinding
 import com.manta.memo.databinding.MemoItemBinding
 import com.manta.memo.util.AppViewHolder
