@@ -26,6 +26,9 @@ fun provideViewModel(owner: ViewModelStoreOwner, application: Application) =
 참고 : https://trend21c.tistory.com/2111
 */
 
+/**
+ * 뷰모델 인스턴스를 가진, 뷰모델 팩토리를 공급하는 모듈
+ */
 @Module
 abstract class ViewModelFactoryModule {
     @Binds
@@ -35,7 +38,7 @@ abstract class ViewModelFactoryModule {
 
 class ViewModelFactory @Inject constructor(
     //이건 viewModelModule에서 @IntoMap과  @ViewModelKey로 제공받는다.
-    val viewModelMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+    val viewModelMap: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
     /*
     viewModelMap[modelClass]?.get()은 그냥 viewModelMap에 들어있는 뷰모델 인스턴스를 가져오는 것.

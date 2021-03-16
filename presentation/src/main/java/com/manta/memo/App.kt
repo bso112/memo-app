@@ -2,7 +2,7 @@ package com.manta.memo
 
 import com.manta.memo.tools.dagger2.component.DaggerAppComponent
 import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
+import dagger.android.DaggerApplication
 
 class App : DaggerApplication() {
 

@@ -14,6 +14,9 @@ import kotlin.reflect.KClass
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 
+/**
+ * 뷰모델의 인스턴스를 공급하는 모듈
+ */
 @Module
 abstract class ViewModelModule {
 
