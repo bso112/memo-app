@@ -5,15 +5,11 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-inline fun <T> Single<T>.subscribeOnBackground()= run {
-    subscribeOn(Schedulers.io())
-    observeOn(AndroidSchedulers.mainThread())
+fun <T> Single<T>.subscribeOnBackground()= run {
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 }
 
 
-
-
-inline fun Completable.subscribeOnBackground() = run {
-    subscribeOn(Schedulers.io())
-    observeOn(AndroidSchedulers.mainThread())
+fun Completable.subscribeOnBackground() = run {
+    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 }

@@ -8,5 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#E4E4E4</color>
+    <color name="cc_dim">#AA000000</color>
     <color name="blue">#FF3700B3</color>
+    <color name="lite_blue">#1754CD</color>
+    <color name="lite_gray2">#DDDDDD</color>
 </resources>

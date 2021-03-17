@@ -16,6 +16,9 @@ interface MemoDao {
     @Insert
     fun createMemo(content : MemoEntity) : Completable
 
+    @Query("DELETE FROM Memo")
+    fun deleteAllMemo() : Completable
+
 
 
 

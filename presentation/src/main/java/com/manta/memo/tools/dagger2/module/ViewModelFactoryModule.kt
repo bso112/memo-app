@@ -43,10 +43,10 @@ class ViewModelFactory @Inject constructor(
     /*
     viewModelMap[modelClass]?.get()은 그냥 viewModelMap에 들어있는 뷰모델 인스턴스를 가져오는 것.
     Dagger를 안쓴다면
-    fun provideViewModel(owner: ViewModelStoreOwner, application: Application) =
+    fun provideViewModel(owner: ViewModelStoreOwner, someArg : Arg) =
     ViewModelProvider(owner, object : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return PictureViewModel(application) as T;    <==== 이부분이랑 같은 역할임
+            return PictureViewModel(someArg) as T;    <==== 이부분이랑 같은 역할임
         }}).get(PictureViewModel::class.java);
      */
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

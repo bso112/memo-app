@@ -46,6 +46,7 @@ class MemoAdapter : ListAdapter<Memo, AppViewHolder<Memo>>(Memo.diffUtil) {
                 FolderItemBinding.inflate(LayoutInflater.from(parent.context))
             )
         }
+
     }
 
     override fun onBindViewHolder(holder: AppViewHolder<Memo>, position: Int) {

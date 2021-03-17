@@ -10,13 +10,19 @@
             name="viewModel"
             type="com.manta.memo.presentation.memo.MemoViewModel" />
 
+        <import type="com.manta.memo.util.AppSheetState"/>
+        <import type="android.view.View" />
+
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
         android:background="@color/gray">
+
+
 
         <LinearLayout
             android:id="@+id/topbar"
@@ -92,6 +98,78 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cc_dim"
+            android:visibility="@{viewModel.createSheetState == AppSheetState.STATE_EXPANDED ? View.VISIBLE : View.INVISIBLE}"
+            android:clickable="@{viewModel.createSheetState == AppSheetState.STATE_EXPANDED}"
+            android:onClick="@{() -> viewModel.onClickDimView()}"
+            />
+
+
+        <ImageButton
+            android:id="@+id/create_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_baseline_add_circle_24"
+            android:visibility="@{viewModel.createSheetState == AppSheetState.STATE_EXPANDED ? View.INVISIBLE : View.VISIBLE}"
+            android:onClick="@{() -> viewModel.onClickCreate()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.95" />
+
+
+        <GridLayout
+            android:id="@+id/create_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:visibility="@{ viewModel.createSheetState == AppSheetState.STATE_EXPANDED ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/create_btn"
+            app:layout_constraintEnd_toEndOf="@+id/create_btn"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:text="메모"
+                android:textColor="@color/white" />
+
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_baseline_circle_24"
+                android:padding="10dp"
+                android:onClick="@{() -> viewModel.onClickCreateMemo()}"
+                android:src="@drawable/ic_baseline_library_books_on_button24" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:text="폴더"
+                android:textColor="@color/white" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_baseline_circle_24"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_folder_open_on_button24" />
+
+
+        </GridLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
