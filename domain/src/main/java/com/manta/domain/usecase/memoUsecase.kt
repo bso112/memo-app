@@ -6,11 +6,9 @@ import javax.inject.Inject
 
 class memoUsecase @Inject constructor(private val repo : Repository) {
 
-    fun getAll() : List<MemoEntity>{
-        return repo.getAll()
-    }
+    fun getAll() = repo.getAll()
 
-    fun createMemo(memo : MemoEntity){
-        repo.createMemo(memo)
-    }
+
+    fun createMemo(memo : MemoEntity) = repo.createMemo(memo)
+
 }

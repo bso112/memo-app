@@ -6,10 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="java.util.List"/>
-        <import type="com.manta.memo.data.Memo"/>
-        <variable name="items" type="List&lt;Memo&gt;"/>
-        <variable name="adapter" type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+        <variable
+            name="viewModel"
+            type="com.manta.memo.presentation.memo.MemoViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,12 +83,12 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:layout_constraintTop_toBottomOf="@+id/sort_option"
-            app:adapter="@{adapter}"
-            app:items="@{items}"
+            app:items="@{viewModel.memoList}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             />

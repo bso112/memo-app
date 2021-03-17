@@ -1,6 +1,6 @@
 package com.manta.memo
 
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.Observable
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -34,6 +34,7 @@ class ExampleUnitTest {
                 emitter.onComplete()
             }
         }.subscribe { print(it)}
+
 
 
     }

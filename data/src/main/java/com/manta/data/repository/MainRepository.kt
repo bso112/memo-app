@@ -16,13 +16,10 @@ class MainRepository  @Inject constructor(app: Application): Repository {
     ).build()
 
     private val memoDao = localDB.memoDao()
-    override fun getAll(): List<MemoEntity> {
-        return memoDao.getAll()
-    }
 
-    override fun createMemo(memo: MemoEntity) {
-        memoDao.createMemo(memo)
-    }
+    override fun getAll() =  memoDao.getAll()
+
+    override fun createMemo(memo: MemoEntity) = memoDao.createMemo(memo)
 
 
 }

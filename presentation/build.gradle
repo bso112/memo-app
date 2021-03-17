@@ -27,6 +27,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
     }
 
     buildTypes {
@@ -47,16 +56,23 @@ android {
 dependencies {
 
     // dagger
-    implementation "com.google.dagger:dagger:$dagger_version"
-    implementation "com.google.dagger:dagger-android:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    implementation dagger
+    implementation daggerAndroidSupport
+    kapt daggerCompiler
+    kapt daggerAndroidProcessor
 
     //room
     implementation ext.room_runtime
     kapt ext.room_complier
     implementation room_ktx
     testImplementation room_testing
+    implementation ext.room_rxjava2
+
+
+    //rxjava
+    implementation rx_java
+    implementation rx_kotlin
+    implementation rx_android
 
     //kotlin ext
     implementation 'androidx.activity:activity-ktx:1.2.1'
@@ -76,7 +92,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
-    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
 }

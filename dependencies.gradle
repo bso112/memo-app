@@ -11,16 +11,19 @@ ext {
     room_complier = "androidx.room:room-compiler:$room_version"
     room_ktx = "androidx.room:room-ktx:$room_version"
     room_testing = "androidx.room:room-testing:$room_version"
+    room_rxjava2 = "androidx.room:room-rxjava2:$room_version"
+
+
+    //rxjava
+    rx_java = "io.reactivex.rxjava2:rxjava:2.1.6"
+    rx_kotlin = "io.reactivex.rxjava2:rxkotlin:2.0.2"
+    rx_android = "io.reactivex.rxjava2:rxandroid:2.1.1"
 
 //     "androidx.room:room-runtime:$room_version"
 //    kapt "androidx.room:room-compiler:$room_version"
 //    implementation "androidx.room:room-ktx:$room_version"
 //    testImplementation "androidx.room:room-testing:$room_version"
 
-    //room
-    room_runtime = "androidx.room:room-runtime:$room_version"
-    room_complier = "androidx.room:room-compiler:$room_version"
-    room_ktx = "androidx.room:room-ktx:$room_version"
-    room_testing =  "androidx.room:room-testing:$room_version"
+
 
 }
