@@ -10,13 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Memo">
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation.memo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.creatememo.CreateMemoActivity"/>
+        <activity android:name=".presentation.updatememo.UpdateMemoActivity"/>
     </application>
 
 </manifest>

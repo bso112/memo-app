@@ -1,6 +1,7 @@
 package com.manta.memo.tools.dagger2.module
 
 import androidx.lifecycle.ViewModel
+import com.manta.memo.presentation.creatememo.CreateMemoViewModel
 import com.manta.memo.presentation.memo.MemoViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -23,6 +24,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(MemoViewModel::class)
-   abstract fun provideViewModel(viewModel: MemoViewModel) : ViewModel
+   abstract fun provideMemoViewModel(viewModel: MemoViewModel) : ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreateMemoViewModel::class)
+    abstract fun provideCreateMemoViewModel(viewModel: CreateMemoViewModel) : ViewModel
 
 }

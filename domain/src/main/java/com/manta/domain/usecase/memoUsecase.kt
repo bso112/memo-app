@@ -10,5 +10,6 @@ class memoUsecase @Inject constructor(private val repo : Repository) {
     fun getAll() = repo.getAll()
     fun createMemo(memo : MemoEntity) = repo.createMemo(memo)
     fun deleteAllMemo() = repo.deleteAllMemo()
+    fun updateMemo(memo : MemoEntity) = repo.updateMemo(memo)
 
 }

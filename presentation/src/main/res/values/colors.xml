@@ -12,4 +12,5 @@
     <color name="blue">#FF3700B3</color>
     <color name="lite_blue">#1754CD</color>
     <color name="lite_gray2">#DDDDDD</color>
+    <color name="transparent">#00000000</color>
 </resources>

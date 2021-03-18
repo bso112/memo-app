@@ -1,6 +1,7 @@
 package com.manta.memo.tools.dagger2.module
 
-import com.manta.memo.MainActivity
+import com.manta.memo.presentation.creatememo.CreateMemoActivity
+import com.manta.memo.presentation.memo.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -22,4 +23,7 @@ abstract class ActivityBinder {
 
      */
     abstract fun mainActivity() : MainActivity
+
+    @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class])
+    abstract fun createMemoActivity() : CreateMemoActivity
 }

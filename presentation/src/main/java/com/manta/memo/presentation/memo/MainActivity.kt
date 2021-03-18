@@ -1,4 +1,4 @@
-package com.manta.memo
+package com.manta.memo.presentation.memo
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.manta.memo.data.Memo
+import com.manta.memo.presentation.creatememo.CreateMemoActivity
 import com.manta.memo.databinding.ActivityMainBinding
-import com.manta.memo.presentation.memo.MemoAdapter
-import com.manta.memo.presentation.memo.MemoViewModel
 import com.manta.memo.tools.app.AppActivity
 import com.manta.memo.util.AppUtil
 import com.manta.memo.util.itemdecoration.SpacingItemDecoration
@@ -32,14 +32,22 @@ class MainActivity : AppActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
-        binding.recycler.adapter = MemoAdapter()
-        binding.recycler.addItemDecoration(SpacingItemDecoration(this, 20F))
+        binding.recycler.adapter = MemoAdapter(object : MemoAdapterDelegate{
+            override fun clickMemo(memo: Memo) {
+                Intent(this@MainActivity, CreateMemoActivity::class.java).apply {
+                    putExtra(AppUtil.EXTRA_MEMO, memo)
+                    startActivityForResult(this, REQUEST_CREATE_MEMO)
+                }
+            }
+
+            override fun clickFolder() {
+
+            }
+        })
+
+        binding.recycler.addItemDecoration(SpacingItemDecoration(this, 10F))
         binding.viewModel = memoViewModel
         setContentView(binding.root)
-
-        memoViewModel.memoList.observe(this, Observer {
-            it.forEach { e -> Log.d("mytest", e.toString()) }
-        })
 
         memoViewModel.onClickCreateMemoEvent.observe(this, Observer {
             Intent(this, CreateMemoActivity::class.java).apply {
@@ -47,9 +55,6 @@ class MainActivity : AppActivity() {
             }
         })
 
-        memoViewModel.createMemoEvent.observe(this, Observer {
-            Log.d("mytest", "inserted!")
-        })
 
         memoViewModel.getAll()
 
@@ -59,6 +64,7 @@ class MainActivity : AppActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CREATE_MEMO && resultCode == RESULT_OK) {
             AppUtil.toast("메모 생성완료!")
+            memoViewModel.getAll()
         }
     }
 

@@ -3,6 +3,7 @@ package com.manta.data.source.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.manta.domain.entity.MemoEntity
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -18,6 +19,9 @@ interface MemoDao {
 
     @Query("DELETE FROM Memo")
     fun deleteAllMemo() : Completable
+
+    @Update
+    fun updateMemo(content : MemoEntity) : Completable
 
 
 

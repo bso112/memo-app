@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.manta.memo.presentation.creatememo.CreateMemoViewModel" />
+        <variable
+            name="isUpdate"
+            type="boolean" />
+
     </data>
 
     <LinearLayout
@@ -48,14 +55,16 @@
                 android:textColor="@color/white"
                 tools:text="2021-03-17(수)" />
 
-            <TextView
+            <EditText
                 android:id="@+id/title"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/date"
                 android:layout_marginTop="5dp"
-                android:hint="제목 없음(최대 13자)" />
+                android:background="@color/transparent"
+                android:hint="제목 없음(최대 13자)"
+                android:text="@={viewModel.editTitle}" />
 
             <ImageView
                 android:layout_width="30dp"
@@ -65,13 +74,22 @@
                 android:background="@drawable/ic_baseline_wb_sunny_24" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/content"
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="내용을 입력하세요"
-            android:layout_weight="1"
-            android:padding="10dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="내용을 입력하세요"
+                android:padding="10dp"
+                android:text="@={viewModel.editContent}" />
+
+        </ScrollView>
 
 
         <View
@@ -82,21 +100,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="10dp">
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{ () ->  isUpdate ? viewModel.clickUpdate() : viewModel.clickCreate()}"
                 android:text="저장" />
+
         </LinearLayout>
     </LinearLayout>
 </layout>

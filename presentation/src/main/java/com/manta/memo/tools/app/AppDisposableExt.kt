@@ -175,11 +175,11 @@ inline fun Completable.subscribeWithDisposable(
 inline fun Completable.subscribeWithDisposable(
     owner: AppDisposableOwner,
     crossinline onNext: () -> Unit,
-    crossinline onError: () -> Unit
+    crossinline onError: (Throwable) -> Unit
 ) {
     subscribe(
         { onNext() },
-        { onError() }
+        { it -> onError(it) }
     ).let {
         owner.disposable.addDisposable(it)
     }

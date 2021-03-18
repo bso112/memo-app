@@ -9,4 +9,5 @@ interface Repository{
     fun getAll() : Single<List<MemoEntity>>
     fun createMemo(memo : MemoEntity) : Completable
     fun deleteAllMemo() : Completable
+    fun updateMemo(memo : MemoEntity) : Completable
 }

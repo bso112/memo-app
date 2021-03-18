@@ -6,28 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="filter"
-            type="int" />
-
+            name="delegate"
+            type="com.manta.memo.presentation.memo.MemoAdapterDelegate" />
         <variable
-            name="date"
-            type="String" />
-
-        <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="content"
-            type="String" />
+            name="memo"
+            type="com.manta.memo.data.Memo"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:onClick="@{()->delegate.clickMemo(memo)}"
         android:padding="10dp">
 
 
@@ -42,7 +33,8 @@
             app:layout_constraintStart_toStartOf="@+id/icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.32999998"
-            tools:backgroundTint="@color/blue" />
+            app:colorFilter="@{memo.filter}"
+             />
 
         <ImageView
             android:id="@+id/icon"
@@ -62,20 +54,25 @@
         <TextView
             android:id="@+id/tv_title"
             style="@style/TextAppearance.AppCompat"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="@{title}"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:text="@{memo.title}"
             app:layout_constraintStart_toEndOf="@id/icon"
             app:layout_constraintTop_toTopOf="@id/icon"
-            tools:text="아이디어" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="@tools:sample/lorem/random"/>
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{date}"
+            android:text="@{memo.date}"
+            android:maxLines="1"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="2021-03-07 (일)" />
@@ -100,7 +97,10 @@
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="@+id/underline_title"
             app:layout_constraintTop_toBottomOf="@id/underline_title"
-            tools:text="@{content}" />
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:text="@{memo.content}"
+            tools:text="@tools:sample/lorem/random"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
