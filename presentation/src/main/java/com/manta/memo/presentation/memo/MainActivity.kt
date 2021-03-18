@@ -32,18 +32,7 @@ class MainActivity : AppActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
-        binding.recycler.adapter = MemoAdapter(object : MemoAdapterDelegate{
-            override fun clickMemo(memo: Memo) {
-                Intent(this@MainActivity, CreateMemoActivity::class.java).apply {
-                    putExtra(AppUtil.EXTRA_MEMO, memo)
-                    startActivityForResult(this, REQUEST_CREATE_MEMO)
-                }
-            }
-
-            override fun clickFolder() {
-
-            }
-        })
+        binding.recycler.adapter = MemoAdapter(memoViewModel)
 
         binding.recycler.addItemDecoration(SpacingItemDecoration(this, 10F))
         binding.viewModel = memoViewModel
@@ -55,6 +44,12 @@ class MainActivity : AppActivity() {
             }
         })
 
+        memoViewModel.onClickMemoEvent.observe(this, Observer {
+            Intent(this@MainActivity, CreateMemoActivity::class.java).apply {
+                putExtra(AppUtil.EXTRA_MEMO, it)
+                startActivityForResult(this, REQUEST_CREATE_MEMO)
+            }
+        })
 
         memoViewModel.getAll()
 

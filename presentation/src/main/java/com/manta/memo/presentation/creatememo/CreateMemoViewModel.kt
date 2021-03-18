@@ -9,6 +9,7 @@ import com.manta.domain.usecase.memoUsecase
 import com.manta.memo.R
 import com.manta.memo.data.Memo
 import com.manta.memo.data.mapper.toMemo
+import com.manta.memo.presentation.memo.MemoAdapterDelegate
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
 import com.manta.memo.tools.app.subscribeWithDisposable
@@ -16,7 +17,9 @@ import com.manta.memo.util.AppUtil
 import java.util.*
 import javax.inject.Inject
 
-class CreateMemoViewModel @Inject constructor(private val useCase: memoUsecase) : AppViewModel() {
+class CreateMemoViewModel @Inject constructor(
+    private val useCase: memoUsecase
+) : AppViewModel() {
 
 
 

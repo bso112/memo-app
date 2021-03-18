@@ -12,7 +12,9 @@ import com.manta.memo.util.AppSheetState
 import com.manta.memo.util.AppUtil
 import javax.inject.Inject
 
-class MemoViewModel @Inject constructor(private val useCase: memoUsecase) : AppViewModel(){
+class MemoViewModel @Inject constructor(
+    private val useCase: memoUsecase
+) : AppViewModel(), MemoAdapterDelegate{
 
     val createSheetState = MutableLiveData<AppSheetState>().apply {
         value = AppSheetState.STATE_COLLAPSED
@@ -24,8 +26,9 @@ class MemoViewModel @Inject constructor(private val useCase: memoUsecase) : AppV
     private val _onClickCreateMemoEvent = MutableLiveData<Unit>()
     val onClickCreateMemoEvent : LiveData<Unit> = _onClickCreateMemoEvent
 
-    private val _onClickMemoEvent = MutableLiveData<Memo>()
+    private val  _onClickMemoEvent = MutableLiveData<Memo>()
     val onClickMemoEvent : LiveData<Memo> = _onClickMemoEvent
+
 
     fun getAll() {
         useCase.getAll()
@@ -52,6 +55,13 @@ class MemoViewModel @Inject constructor(private val useCase: memoUsecase) : AppV
         createSheetState.value = AppSheetState.STATE_COLLAPSED
     }
 
+    override fun clickMemo(memo: Memo) {
+        _onClickMemoEvent.value = memo
+    }
+
+    override fun clickFolder() {
+
+    }
 
 
 }
