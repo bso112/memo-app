@@ -6,10 +6,14 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.manta.memo.R
 import com.manta.memo.data.Memo
 import com.manta.memo.presentation.creatememo.CreateMemoActivity
 import com.manta.memo.databinding.ActivityMainBinding
+import com.manta.memo.presentation.dialog.AppDialog
+import com.manta.memo.presentation.dialog.AppDialogDelegate
 import com.manta.memo.tools.app.AppActivity
+import com.manta.memo.tools.app.set
 import com.manta.memo.util.AppUtil
 import com.manta.memo.util.itemdecoration.SpacingItemDecoration
 import javax.inject.Inject
@@ -34,6 +38,7 @@ class MainActivity : AppActivity() {
         binding.lifecycleOwner = this
         binding.recycler.adapter = MemoAdapter(memoViewModel)
 
+
         binding.recycler.addItemDecoration(SpacingItemDecoration(this, 10F))
         binding.viewModel = memoViewModel
         setContentView(binding.root)
@@ -49,6 +54,16 @@ class MainActivity : AppActivity() {
                 putExtra(AppUtil.EXTRA_MEMO, it)
                 startActivityForResult(this, REQUEST_CREATE_MEMO)
             }
+        })
+
+        memoViewModel.onLongClickMemoEvent.observe(this, Observer {
+            AppDialog.Builder<Memo>(this)
+                .set { title = it.title }
+                .set { content = it.content }
+                .set { image = R.drawable.ic_baseline_delete_24}
+                .set { delegate = memoViewModel}
+                .build()
+                .show()
         })
 
         memoViewModel.getAll()

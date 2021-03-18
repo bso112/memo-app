@@ -10,4 +10,5 @@ interface Repository{
     fun createMemo(memo : MemoEntity) : Completable
     fun deleteAllMemo() : Completable
     fun updateMemo(memo : MemoEntity) : Completable
+    fun deleteMemo(memo : MemoEntity) : Completable
 }

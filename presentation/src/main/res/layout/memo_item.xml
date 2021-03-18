@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:onClick="@{()->delegate.clickMemo(memo)}"
+        app:onLongClick="@{()->delegate.longClickMemo(memo)}"
         android:padding="10dp">
 
 

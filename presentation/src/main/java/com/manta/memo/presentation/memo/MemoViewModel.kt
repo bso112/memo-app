@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manta.domain.usecase.memoUsecase
 import com.manta.memo.data.Memo
+import com.manta.memo.data.mapper.toEntity
 import com.manta.memo.data.mapper.toMemo
+import com.manta.memo.presentation.dialog.AppDialogDelegate
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
 import com.manta.memo.tools.app.subscribeWithDisposable
@@ -14,7 +16,7 @@ import javax.inject.Inject
 
 class MemoViewModel @Inject constructor(
     private val useCase: memoUsecase
-) : AppViewModel(), MemoAdapterDelegate{
+) : AppViewModel(), MemoAdapterDelegate, AppDialogDelegate<Memo>{
 
     val createSheetState = MutableLiveData<AppSheetState>().apply {
         value = AppSheetState.STATE_COLLAPSED
@@ -29,6 +31,9 @@ class MemoViewModel @Inject constructor(
     private val  _onClickMemoEvent = MutableLiveData<Memo>()
     val onClickMemoEvent : LiveData<Memo> = _onClickMemoEvent
 
+    private val _onLongClickMemoEvent = MutableLiveData<Memo>()
+    val onLongClickMemoEvent : LiveData<Memo> = _onLongClickMemoEvent
+
 
     fun getAll() {
         useCase.getAll()
@@ -38,6 +43,14 @@ class MemoViewModel @Inject constructor(
             }
     }
 
+
+    fun deleteMemo(memo : Memo){
+        useCase.deleteMemo(memo.toEntity())
+            .subscribeOnBackground()
+            .subscribeWithDisposable(this){
+
+            }
+    }
 
 
     fun onClickCreate(){
@@ -59,7 +72,19 @@ class MemoViewModel @Inject constructor(
         _onClickMemoEvent.value = memo
     }
 
+    override fun longClickMemo(memo: Memo) {
+        _onLongClickMemoEvent.value = memo
+    }
+
     override fun clickFolder() {
+
+    }
+
+    override fun onConfirm(contents: Memo) {
+        deleteMemo(contents)
+    }
+
+    override fun onCancel(contents: Memo) {
 
     }
 

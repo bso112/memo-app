@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
+import com.manta.memo.App
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
@@ -30,7 +31,7 @@ object AppUtil {
     }
 
     fun toast(msg: String) {
-        Toast.makeText(AppContext.context, msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(App.context, msg, Toast.LENGTH_SHORT).show()
     }
 
     fun LogD(log: String?) {
@@ -42,18 +43,18 @@ object AppUtil {
     }
 
     fun getColor(@ColorRes res: Int): Int {
-        return AppContext.context.resources.getColor(res)
+        return App.context.resources.getColor(res)
     }
 
     fun getColorTintList(@ColorRes res: Int): ColorStateList {
-        return AppContext.context.resources.getColorStateList(res)
+        return App.context.resources.getColorStateList(res)
     }
 
 
     fun getDate(date: Date): String {
         return SimpleDateFormat(
             "yyyy-MM-dd",
-            AppContext.context.resources.configuration.locale
+            App.context.resources.configuration.locale
         ).format(date)
     }
 }

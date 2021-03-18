@@ -1,12 +1,16 @@
 package com.manta.memo
 
+import android.app.Application
 import com.manta.memo.tools.dagger2.component.DaggerAppComponent
-import com.manta.memo.util.AppContext
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
 class App : DaggerApplication() {
 
+    companion object{
+        lateinit var context : Application
+            private set
+    }
     val applicationInjector by lazy{
         DaggerAppComponent.factory().create(this)
     }
@@ -16,7 +20,7 @@ class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        AppContext.context = applicationContext
+        context = this
     }
 
 

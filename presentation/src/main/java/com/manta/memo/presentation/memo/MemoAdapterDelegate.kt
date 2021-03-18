@@ -4,5 +4,7 @@ import com.manta.memo.data.Memo
 
 interface MemoAdapterDelegate {
     fun clickMemo(memo : Memo)
+    fun longClickMemo(memo : Memo)
     fun clickFolder()
+
 }

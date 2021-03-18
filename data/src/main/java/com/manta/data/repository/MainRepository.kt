@@ -23,6 +23,7 @@ class MainRepository  @Inject constructor(app: Application): Repository {
     override fun createMemo(memo: MemoEntity) = memoDao.createMemo(memo)
     override fun deleteAllMemo(): Completable = memoDao.deleteAllMemo()
     override fun updateMemo(memo: MemoEntity) = memoDao.updateMemo(memo)
+    override fun deleteMemo(memo: MemoEntity) = memoDao.deleteMemo(memo)
 
 
 }
