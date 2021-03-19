@@ -82,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="@{()->dialog.onCancel()}"
+                    android:text="@{dialog.cancelText}"
                     android:textAlignment="center"
                     tools:text="취소" />
 
@@ -91,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="@{()->dialog.onConfirm()}"
+                    android:text="@{dialog.confirmText}"
                     android:textAlignment="center"
                     android:textColor="@color/red"
                     tools:text="삭제" />

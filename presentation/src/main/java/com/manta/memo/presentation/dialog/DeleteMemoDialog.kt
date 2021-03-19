@@ -15,16 +15,18 @@ class DeleteMemoDialog(
         AppDialogLayoutBinding.inflate(LayoutInflater.from(context))
 
 
+    init {
+        binding.dialog = this
+        binding.lifecycleOwner = this
+        cancelText.set("취소")
+        confirmText.set("삭제")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.dialog = this
-        binding.lifecycleOwner = this
-        confirmText.set("삭제")
-        cancelText.set("취소")
-
     }
+
 
 }

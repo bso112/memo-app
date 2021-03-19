@@ -17,7 +17,7 @@ abstract class AppDialog(
     windowWidth: Int = 0
 ) : Dialog(context, getThemeResId(windowWidth)), LifecycleAware, LifecycleOwner {
 
-    private lateinit var lifecycleRegistry: LifecycleRegistry
+    private var lifecycleRegistry: LifecycleRegistry? = null
 
     private var onConfirmListener: (() -> Unit)? = null
     private var onCancelListener: (() -> Unit)? = null
@@ -52,22 +52,23 @@ abstract class AppDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleRegistry = LifecycleRegistry(this)
-        lifecycleRegistry.currentState = Lifecycle.State.CREATED
+        lifecycleRegistry?.currentState = Lifecycle.State.CREATED
 
         setOnDismissListener {
-            lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+            lifecycleRegistry?.currentState = Lifecycle.State.DESTROYED
         }
 
     }
 
     override fun onStart() {
         super.onStart()
-        lifecycleRegistry.currentState = Lifecycle.State.STARTED
+        lifecycleRegistry?.currentState = Lifecycle.State.STARTED
     }
 
     override fun getLifecycle(): Lifecycle {
-        return lifecycleRegistry
+        if(lifecycleRegistry == null)
+            lifecycleRegistry = LifecycleRegistry(this)
+        return lifecycleRegistry!!
     }
 
 
