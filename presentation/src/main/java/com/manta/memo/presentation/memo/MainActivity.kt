@@ -57,11 +57,12 @@ class MainActivity : AppActivity() {
         })
 
         memoViewModel.onLongClickMemoEvent.observe(this, Observer {
-            AppDialog.Builder<Memo>(this)
+            AppDialog.Builder<Memo>(this, it)
                 .set { title = it.title }
                 .set { content = it.content }
                 .set { image = R.drawable.ic_baseline_delete_24}
                 .set { delegate = memoViewModel}
+                .set { windowWidth = AppDialog.MIN_WIDTH}
                 .build()
                 .show()
         })

@@ -1,5 +1,6 @@
 package com.manta.memo.presentation.memo
 
+import android.app.Dialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manta.domain.usecase.memoUsecase
@@ -80,12 +81,15 @@ class MemoViewModel @Inject constructor(
 
     }
 
-    override fun onConfirm(contents: Memo) {
-        deleteMemo(contents)
+
+    override fun onCancel(contents: Memo, dialog: Dialog) {
+        dialog.dismiss()
     }
 
-    override fun onCancel(contents: Memo) {
-
+    override fun onConfirm(contents: Memo, dialog: Dialog) {
+        deleteMemo(contents)
+        dialog.dismiss()
+        getAll()
     }
 
 

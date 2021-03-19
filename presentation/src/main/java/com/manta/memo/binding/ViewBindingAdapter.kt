@@ -10,7 +10,7 @@ object ViewBindingAdapter {
     fun View.setOnLongClick(onLongClick : ()->Unit){
         setOnLongClickListener {
             onLongClick()
-            false
+            true //onClick이벤트 막기
         }
     }
 }

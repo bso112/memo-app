@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- support library 지원을 위해 app 네임스페이스 사용 -->
+    <font
+        android:font="@font/noto_sans_regular"
+        android:fontWeight="400"
+        android:fontStyle="normal"
+        app:font="@font/noto_sans_regular"
+        app:fontWeight="400"
+        app:fontStyle="normal" />
+
+</font-family>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.Dialog.MinWidth" parent="Theme.AppCompat.Light.Dialog.MinWidth">
+        <item name="android:windowMinWidthMinor">80%</item>
+    </style>
+
+    <style name="AppTheme.Dialog.Match" parent="Theme.AppCompat.Light.Dialog.MinWidth">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+</resources>
