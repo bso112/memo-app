@@ -3,18 +3,21 @@ package com.manta.memo.presentation.dialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
+
 import androidx.annotation.DrawableRes
 import androidx.databinding.ObservableField
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import com.manta.memo.R
-import com.manta.memo.databinding.AppDialogLayoutBinding
 import com.manta.memo.tools.app.LifecycleAware
 
 abstract class AppDialog(
     context: Context,
     windowWidth: Int = 0
-) : Dialog(context, getThemeResId(windowWidth)), LifecycleAware {
+) : Dialog(context, getThemeResId(windowWidth)), LifecycleAware, LifecycleOwner {
+
+    private lateinit var lifecycleRegistry: LifecycleRegistry
 
     private var onConfirmListener: (() -> Unit)? = null
     private var onCancelListener: (() -> Unit)? = null
@@ -46,6 +49,26 @@ abstract class AppDialog(
         }
     }
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleRegistry = LifecycleRegistry(this)
+        lifecycleRegistry.currentState = Lifecycle.State.CREATED
+
+        setOnDismissListener {
+            lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        lifecycleRegistry.currentState = Lifecycle.State.STARTED
+    }
+
+    override fun getLifecycle(): Lifecycle {
+        return lifecycleRegistry
+    }
 
 
     override fun addLifecyclerOwner(lifecyclerOwner: LifecycleOwner) {

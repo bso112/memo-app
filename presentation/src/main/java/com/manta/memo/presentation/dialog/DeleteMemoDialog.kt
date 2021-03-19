@@ -14,18 +14,14 @@ class DeleteMemoDialog(
     private val binding: AppDialogLayoutBinding =
         AppDialogLayoutBinding.inflate(LayoutInflater.from(context))
 
-    //부모가 먼저불림.
-    init {
-        binding.dialog = this
-        binding.lifecycleOwner = 
-        _imageResource.set(R.drawable.ic_baseline_delete_24)
 
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.dialog = this
+        binding.lifecycleOwner = this
         confirmText.set("삭제")
         cancelText.set("취소")
 
