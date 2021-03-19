@@ -7,17 +7,15 @@ import com.manta.domain.usecase.memoUsecase
 import com.manta.memo.data.Memo
 import com.manta.memo.data.mapper.toEntity
 import com.manta.memo.data.mapper.toMemo
-import com.manta.memo.presentation.dialog.AppDialogDelegate
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
 import com.manta.memo.tools.app.subscribeWithDisposable
 import com.manta.memo.util.AppSheetState
-import com.manta.memo.util.AppUtil
 import javax.inject.Inject
 
 class MemoViewModel @Inject constructor(
     private val useCase: memoUsecase
-) : AppViewModel(), MemoAdapterDelegate, AppDialogDelegate<Memo>{
+) : AppViewModel(), MemoAdapterDelegate{
 
     val createSheetState = MutableLiveData<AppSheetState>().apply {
         value = AppSheetState.STATE_COLLAPSED
@@ -81,16 +79,6 @@ class MemoViewModel @Inject constructor(
 
     }
 
-
-    override fun onCancel(contents: Memo, dialog: Dialog) {
-        dialog.dismiss()
-    }
-
-    override fun onConfirm(contents: Memo, dialog: Dialog) {
-        deleteMemo(contents)
-        dialog.dismiss()
-        getAll()
-    }
 
 
 }

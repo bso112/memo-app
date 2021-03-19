@@ -4,20 +4,34 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.WindowManager
 import androidx.annotation.DrawableRes
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LifecycleOwner
 import com.manta.memo.R
-import com.manta.memo.data.Memo
 import com.manta.memo.databinding.AppDialogLayoutBinding
-import com.manta.memo.tools.app.BuilderBase
 import com.manta.memo.tools.app.LifecycleAware
 
-class AppDialog<T>(
-    builder: Builder<T>
-) : Dialog(builder.context, getThemeResId(builder.windowWidth)), LifecycleAware {
+abstract class AppDialog(
+    context: Context,
+    windowWidth: Int = 0
+) : Dialog(context, getThemeResId(windowWidth)), LifecycleAware {
 
-    companion object{
+    private var onConfirmListener: (() -> Unit)? = null
+    private var onCancelListener: (() -> Unit)? = null
+
+
+    //이렇게하고 xml에 연결해두면 시점상관없이 외부에서 set하면 바로 갱신된다.
+    //따라서 생성자로 이 모든걸 미리 다 받을 필요없음. builder패턴도 필요없음.
+    val _imageResource = ObservableField(0)
+
+    @DrawableRes
+    var imageResource = _imageResource.get() ?: 0
+    val title = ObservableField("asdf")
+    val content = ObservableField("asdfasdf")
+    val cancelText = ObservableField("")
+    val confirmText = ObservableField("")
+
+    companion object {
         const val MIN_WIDTH = 0
         const val MATCH_PARENT = 1
         const val WRAP_CONTENT = 2
@@ -33,25 +47,6 @@ class AppDialog<T>(
     }
 
 
-    private var binding: AppDialogLayoutBinding =
-        AppDialogLayoutBinding.inflate(LayoutInflater.from(builder.context))
-
-    init {
-        binding.icon = builder.image
-        binding.content = builder.content
-        binding.title = builder.title
-        binding.delegate = builder.delegate
-        binding.memo = builder.toDelete //삭제할 메모
-        binding.dialog = this
-
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-    }
 
     override fun addLifecyclerOwner(lifecyclerOwner: LifecycleOwner) {
         lifecyclerOwner.lifecycle.addObserver(this)
@@ -69,38 +64,27 @@ class AppDialog<T>(
         dismiss()
     }
 
-
-
-    //꼭 있어야하는건 생성자로
-    class Builder<T>(val context: Context, val toDelete : Memo) : BuilderBase {
-        @DrawableRes
-        var image : Int = 0
-        var title : String = ""
-        var content : String = ""
-        var delegate : AppDialogDelegate<T>? = null
-        var windowWidth = 0
-
-        fun build(): AppDialog<T> {
-            return AppDialog(this)
-        }
-
+    fun onConfirm() {
+        onConfirmListener?.let { it() }
+        dismiss()
     }
+
+    fun onCancel() {
+        onCancelListener?.let { it() }
+        dismiss()
+    }
+
+
+    fun setOnConfirmListener(listener: () -> Unit) {
+        onConfirmListener = listener
+    }
+
+    fun setOnCancelListener(listener: () -> Unit) {
+        onCancelListener = listener
+    }
+
+
 }
 
 
 
-interface AppDialogDelegate<T>{
-    /**
-     * @param contents : 이 다이어로그가 설명하는 대상
-     * ex) 삭제 다이어로그면 삭제하는 대상
-     * @param dialog : 이 콜백을 수행할 다이어로그
-     */
-    fun onConfirm(contents : T, dialog : Dialog)
-
-    /**
-     * @param contents : 이 다이어로그가 설명하는 대상
-     * ex) 삭제 다이어로그면 삭제하는 대상
-     * @param dialog : 이 콜백을 수행할 다이어로그
-     */
-    fun onCancel(contents : T, dialog : Dialog)
-}

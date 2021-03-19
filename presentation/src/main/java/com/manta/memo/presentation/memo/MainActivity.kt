@@ -2,18 +2,13 @@ package com.manta.memo.presentation.memo
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.manta.memo.R
-import com.manta.memo.data.Memo
-import com.manta.memo.presentation.creatememo.CreateMemoActivity
 import com.manta.memo.databinding.ActivityMainBinding
-import com.manta.memo.presentation.dialog.AppDialog
-import com.manta.memo.presentation.dialog.AppDialogDelegate
+import com.manta.memo.presentation.creatememo.CreateMemoActivity
+import com.manta.memo.presentation.dialog.DeleteMemoDialog
 import com.manta.memo.tools.app.AppActivity
-import com.manta.memo.tools.app.set
 import com.manta.memo.util.AppUtil
 import com.manta.memo.util.itemdecoration.SpacingItemDecoration
 import javax.inject.Inject
@@ -57,14 +52,13 @@ class MainActivity : AppActivity() {
         })
 
         memoViewModel.onLongClickMemoEvent.observe(this, Observer {
-            AppDialog.Builder<Memo>(this, it)
-                .set { title = it.title }
-                .set { content = it.content }
-                .set { image = R.drawable.ic_baseline_delete_24}
-                .set { delegate = memoViewModel}
-                .set { windowWidth = AppDialog.MIN_WIDTH}
-                .build()
-                .show()
+            DeleteMemoDialog(this).apply {
+                title.set(it.title)
+                content.set(it.content)
+                setOnConfirmListener { memoViewModel.deleteMemo(it); memoViewModel.getAll(); }
+            }.show()
+
+
         })
 
         memoViewModel.getAll()
