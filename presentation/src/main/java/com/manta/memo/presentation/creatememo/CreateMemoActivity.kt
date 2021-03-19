@@ -43,7 +43,6 @@ class CreateMemoActivity : AppActivity() {
             finish()
         })
 
-
     }
 
 

@@ -53,10 +53,10 @@ class MainActivity : AppActivity() {
 
         memoViewModel.onLongClickMemoEvent.observe(this, Observer {
             DeleteMemoDialog(this).apply {
-                title.set(it.title)
-                content.set(it.content)
                 setOnConfirmListener { memoViewModel.deleteMemo(it); memoViewModel.getAll(); }
             }.show()
+
+
 
 
         })

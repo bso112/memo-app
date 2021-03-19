@@ -3,21 +3,21 @@ package com.manta.memo.presentation.dialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.view.WindowManager
 
 import androidx.annotation.DrawableRes
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.MutableLiveData
 import com.manta.memo.R
 import com.manta.memo.tools.app.LifecycleAware
 
 abstract class AppDialog(
     context: Context,
     windowWidth: Int = 0
-) : Dialog(context, getThemeResId(windowWidth)), LifecycleAware, LifecycleOwner {
-
-    private var lifecycleRegistry: LifecycleRegistry? = null
+) : Dialog(context, getThemeResId(windowWidth)), LifecycleAware {
 
     private var onConfirmListener: (() -> Unit)? = null
     private var onCancelListener: (() -> Unit)? = null
@@ -25,14 +25,14 @@ abstract class AppDialog(
 
     //이렇게하고 xml에 연결해두면 시점상관없이 외부에서 set하면 바로 갱신된다.
     //따라서 생성자로 이 모든걸 미리 다 받을 필요없음. builder패턴도 필요없음.
-    val _imageResource = ObservableField(0)
+    val _imageResource = MutableLiveData(0)
 
     @DrawableRes
-    var imageResource = _imageResource.get() ?: 0
-    val title = ObservableField("asdf")
-    val content = ObservableField("asdfasdf")
-    val cancelText = ObservableField("")
-    val confirmText = ObservableField("")
+    var imageResource = _imageResource.value
+    val title = MutableLiveData("asdf")
+    val content = MutableLiveData("asdfasdf")
+    val cancelText = MutableLiveData("")
+    val confirmText = MutableLiveData("")
 
     companion object {
         const val MIN_WIDTH = 0
@@ -50,26 +50,7 @@ abstract class AppDialog(
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        lifecycleRegistry?.currentState = Lifecycle.State.CREATED
 
-        setOnDismissListener {
-            lifecycleRegistry?.currentState = Lifecycle.State.DESTROYED
-        }
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        lifecycleRegistry?.currentState = Lifecycle.State.STARTED
-    }
-
-    override fun getLifecycle(): Lifecycle {
-        if(lifecycleRegistry == null)
-            lifecycleRegistry = LifecycleRegistry(this)
-        return lifecycleRegistry!!
-    }
 
 
     override fun addLifecyclerOwner(lifecyclerOwner: LifecycleOwner) {

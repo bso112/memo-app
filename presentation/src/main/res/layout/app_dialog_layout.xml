@@ -13,7 +13,7 @@
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/cc_dim">
 
@@ -26,8 +26,8 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="150dp"
-                android:layout_height="150dp"
                 android:background="@{dialog.imageResource}"
+                android:layout_height="150dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,10 +36,14 @@
                 tools:background="@color/cc_dim" />
 
             <TextView
+                android:background="@color/blue"
                 android:id="@+id/dialog_title"
                 style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:layout_marginVertical="15dp"
                 android:text="@{dialog.title}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,16 +55,18 @@
 
             <TextView
                 android:id="@+id/dialog_content"
+                android:background="@color/blue"
                 style="@style/TextAppearance.AppCompat"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
                 android:text="@{dialog.content}"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dialog_title"
-                app:layout_constraintVertical_bias="0.25"
+                app:layout_constraintVertical_bias="0.19999999"
                 tools:text="content" />
 
 
@@ -68,8 +74,8 @@
                 android:id="@+id/selection_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:padding="10dp"
+                android:background="@color/blue"
+                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dialog_content"
