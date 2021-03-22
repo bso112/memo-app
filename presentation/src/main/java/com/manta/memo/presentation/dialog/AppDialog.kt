@@ -13,11 +13,12 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.MutableLiveData
 import com.manta.memo.R
 import com.manta.memo.tools.app.LifecycleAware
+import com.manta.memo.util.AppUtil
 
 abstract class AppDialog(
     context: Context,
     windowWidth: Int = 0
-) : Dialog(context, getThemeResId(windowWidth)), LifecycleAware {
+) : Dialog(context, R.style.RoundedCornersDialog), LifecycleAware {
 
     private var onConfirmListener: (() -> Unit)? = null
     private var onCancelListener: (() -> Unit)? = null
@@ -47,6 +48,12 @@ abstract class AppDialog(
                 else -> 0
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window?.attributes?.width = AppUtil.dp2Px(context, 300F)
+        window?.attributes?.height = WindowManager.LayoutParams.MATCH_PARENT
     }
 
 

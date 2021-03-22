@@ -7,4 +7,9 @@
     <style name="AppTheme.Dialog.Match" parent="Theme.AppCompat.Light.Dialog.MinWidth">
         <item name="android:layout_width">match_parent</item>
     </style>
+
+    <style name="RoundedCornersDialog" parent="@style/Theme.MaterialComponents.Dialog">
+        <item name="dialogCornerRadius">20dp</item>
+    </style>
+
 </resources>

@@ -55,10 +55,6 @@ class MainActivity : AppActivity() {
             DeleteMemoDialog(this).apply {
                 setOnConfirmListener { memoViewModel.deleteMemo(it); memoViewModel.getAll(); }
             }.show()
-
-
-
-
         })
 
         memoViewModel.getAll()
