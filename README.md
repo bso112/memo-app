@@ -22,7 +22,7 @@ git clone https://github.com/bsw112/anime_worldcup.git
 * 폴더의 CRUD
 
 ## 실제화면
-![alt](readme/demo.PNG)
+![alt](readme/demo.png)
 
 
 
