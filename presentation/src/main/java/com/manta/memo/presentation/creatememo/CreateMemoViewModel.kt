@@ -1,15 +1,12 @@
 package com.manta.memo.presentation.creatememo
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.manta.domain.entity.MemoEntity
+import com.manta.data.Entity.MemoEntity
 import com.manta.domain.usecase.memoUsecase
 import com.manta.memo.R
 import com.manta.memo.data.Memo
 import com.manta.memo.data.mapper.toMemo
-import com.manta.memo.presentation.memo.MemoAdapterDelegate
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
 import com.manta.memo.tools.app.subscribeWithDisposable

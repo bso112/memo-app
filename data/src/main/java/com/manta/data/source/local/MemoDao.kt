@@ -1,7 +1,7 @@
 package com.manta.data.source.local
 
 import androidx.room.*
-import com.manta.domain.entity.MemoEntity
+import com.manta.data.Entity.MemoEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 

@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.WindowManager
 
 import androidx.annotation.DrawableRes
-import androidx.databinding.ObservableField
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.MutableLiveData
 import com.manta.memo.R
 import com.manta.memo.tools.app.LifecycleAware
@@ -24,14 +21,14 @@ abstract class AppDialog(
     private var onCancelListener: (() -> Unit)? = null
 
 
-    //이렇게하고 xml에 연결해두면 시점상관없이 외부에서 set하면 바로 갱신된다.
+    //이렇게하고 xml에 연결해두면 시점상관없이 외부에서 set하면 바로 화면에 갱신된다.
     //따라서 생성자로 이 모든걸 미리 다 받을 필요없음. builder패턴도 필요없음.
     val _imageResource = MutableLiveData(0)
 
     @DrawableRes
     var imageResource = _imageResource.value
-    val title = MutableLiveData("asdf")
-    val content = MutableLiveData("asdfasdf")
+    val title = MutableLiveData("")
+    val content = MutableLiveData("")
     val cancelText = MutableLiveData("")
     val confirmText = MutableLiveData("")
 

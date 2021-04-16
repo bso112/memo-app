@@ -1,4 +1,4 @@
-package com.manta.domain.entity
+package com.manta.data.Entity
 
 import androidx.annotation.ColorRes
 import androidx.room.ColumnInfo

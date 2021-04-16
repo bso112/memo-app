@@ -1,9 +1,9 @@
 package com.manta.memo.data.mapper
 
-import com.manta.domain.entity.MemoEntity
+import com.manta.domain.data.MemoData
 import com.manta.memo.data.Memo
 
-fun Memo.toEntity() = MemoEntity(
+fun Memo.toData() = MemoData(
     title,
     content,
     isFolder,

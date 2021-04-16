@@ -1,11 +1,10 @@
 package com.manta.memo.presentation.memo
 
-import android.app.Dialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manta.domain.usecase.memoUsecase
 import com.manta.memo.data.Memo
-import com.manta.memo.data.mapper.toEntity
+import com.manta.memo.data.mapper.toData
 import com.manta.memo.data.mapper.toMemo
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
@@ -44,7 +43,7 @@ class MemoViewModel @Inject constructor(
 
 
     fun deleteMemo(memo : Memo){
-        useCase.deleteMemo(memo.toEntity())
+        useCase.deleteMemo(memo.toData())
             .subscribeOnBackground()
             .subscribeWithDisposable(this){
 
