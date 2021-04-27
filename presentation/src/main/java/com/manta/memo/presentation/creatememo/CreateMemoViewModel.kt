@@ -2,8 +2,9 @@ package com.manta.memo.presentation.creatememo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.manta.data.Entity.MemoEntity
-import com.manta.domain.usecase.memoUsecase
+import com.manta.domain.data.MemoData
+import com.manta.domain.usecase.CreateMemoUsecase
+import com.manta.domain.usecase.UpdateMemoUsecase
 import com.manta.memo.R
 import com.manta.memo.data.Memo
 import com.manta.memo.data.mapper.toMemo
@@ -15,7 +16,8 @@ import java.util.*
 import javax.inject.Inject
 
 class CreateMemoViewModel @Inject constructor(
-    private val useCase: memoUsecase
+    private val createMemoUsecase: CreateMemoUsecase,
+    private val updateMemoUsecase: UpdateMemoUsecase
 ) : AppViewModel() {
 
 
@@ -35,23 +37,23 @@ class CreateMemoViewModel @Inject constructor(
         updateMemo(getMemo())
     }
 
-    private fun createMemo(memo : MemoEntity) {
-        useCase.createMemo(memo)
+    private fun createMemo(memo : MemoData) {
+        createMemoUsecase.createMemo(memo)
             .subscribeOnBackground()
             .subscribeWithDisposable(this) {
                 _createMemoEvent.value = memo.toMemo()
             }
     }
 
-    private fun updateMemo(memo : MemoEntity){
-        useCase.updateMemo(memo)
+    private fun updateMemo(memo : MemoData){
+        updateMemoUsecase.updateMemo(memo)
             .subscribeOnBackground()
             .subscribeWithDisposable(this) {
                 _createMemoEvent.value = memo.toMemo()
             }
     }
 
-    private fun getMemo() = MemoEntity(
+    private fun getMemo() = MemoData(
         editTitle.value!!,
         editContent.value!!,
         false,
