@@ -9,8 +9,11 @@ open class AppActivity : DaggerAppCompatActivity(), AppDisposableOwner {
 
     override val disposable: AppDisposable = AppDisposableImpl()
 
+
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()
     }
+
+
 }

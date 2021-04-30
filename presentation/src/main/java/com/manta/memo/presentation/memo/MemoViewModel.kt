@@ -9,6 +9,7 @@ import com.manta.memo.data.mapper.toMemo
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
 import com.manta.memo.tools.app.subscribeWithDisposable
+import com.manta.memo.tools.app.toLiveData
 import com.manta.memo.util.AppSheetState
 import javax.inject.Inject
 
@@ -21,17 +22,19 @@ class MemoViewModel @Inject constructor(
         value = AppSheetState.STATE_COLLAPSED
     }
 
+
+
     private val _memoList = MutableLiveData<List<Memo>>()
-    val memoList : LiveData<List<Memo>> = _memoList
+    val memoList = _memoList.toLiveData()
 
     private val _onClickCreateMemoEvent = MutableLiveData<Unit>()
-    val onClickCreateMemoEvent : LiveData<Unit> = _onClickCreateMemoEvent
+    val onClickCreateMemoEvent = _onClickCreateMemoEvent.toLiveData()
 
     private val  _onClickMemoEvent = MutableLiveData<Memo>()
-    val onClickMemoEvent : LiveData<Memo> = _onClickMemoEvent
+    val onClickMemoEvent  = _onClickMemoEvent.toLiveData()
 
     private val _onLongClickMemoEvent = MutableLiveData<Memo>()
-    val onLongClickMemoEvent : LiveData<Memo> = _onLongClickMemoEvent
+    val onLongClickMemoEvent  = _onLongClickMemoEvent.toLiveData()
 
 
     fun getAll() {

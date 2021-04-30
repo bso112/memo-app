@@ -1,6 +1,4 @@
 package com.manta.memo.presentation.creatememo
-
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manta.domain.data.MemoData
 import com.manta.domain.usecase.CreateMemoUsecase
@@ -11,6 +9,7 @@ import com.manta.memo.data.mapper.toMemo
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
 import com.manta.memo.tools.app.subscribeWithDisposable
+import com.manta.memo.tools.app.toLiveData
 import com.manta.memo.util.AppUtil
 import java.util.*
 import javax.inject.Inject
@@ -23,7 +22,7 @@ class CreateMemoViewModel @Inject constructor(
 
 
     private val _createMemoEvent = MutableLiveData<Memo>()
-    val createMemoEvent : LiveData<Memo> = _createMemoEvent
+    val createMemoEvent = _createMemoEvent.toLiveData()
 
     val editTitle = MutableLiveData("")
     val editContent = MutableLiveData("")
