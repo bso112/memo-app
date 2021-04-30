@@ -2,14 +2,12 @@ package com.manta.data.repository
 
 import android.app.Application
 import androidx.room.Room
-import com.manta.data.source.local.AppDatabase
-import com.manta.data.Entity.MemoEntity
+import com.manta.data.datasource.local.AppDatabase
 import com.manta.data.mapper.toData
 import com.manta.data.mapper.toEntity
 import com.manta.domain.data.MemoData
 import com.manta.domain.repository.Repository
 import io.reactivex.Completable
-import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 

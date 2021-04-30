@@ -3,6 +3,8 @@ package com.manta.memo.presentation.creatememo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manta.data.Entity.MemoEntity
+import com.manta.data.mapper.toData
+import com.manta.domain.data.MemoData
 import com.manta.domain.usecase.memoUsecase
 import com.manta.memo.R
 import com.manta.memo.data.Memo
@@ -35,7 +37,7 @@ class CreateMemoViewModel @Inject constructor(
         updateMemo(getMemo())
     }
 
-    private fun createMemo(memo : MemoEntity) {
+    private fun createMemo(memo : MemoData) {
         useCase.createMemo(memo)
             .subscribeOnBackground()
             .subscribeWithDisposable(this) {
@@ -43,7 +45,7 @@ class CreateMemoViewModel @Inject constructor(
             }
     }
 
-    private fun updateMemo(memo : MemoEntity){
+    private fun updateMemo(memo : MemoData){
         useCase.updateMemo(memo)
             .subscribeOnBackground()
             .subscribeWithDisposable(this) {
@@ -51,7 +53,7 @@ class CreateMemoViewModel @Inject constructor(
             }
     }
 
-    private fun getMemo() = MemoEntity(
+    private fun getMemo() = MemoData(
         editTitle.value!!,
         editContent.value!!,
         false,

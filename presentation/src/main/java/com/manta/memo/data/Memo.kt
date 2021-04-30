@@ -14,8 +14,11 @@ data class Memo(
 ) : Serializable {
 
     companion object {
+
         val diffUtil = object : DiffUtil.ItemCallback<Memo>() {
+
             override fun areItemsTheSame(oldItem: Memo, newItem: Memo): Boolean {
+                listOf<Unit>()
                 return oldItem.content == newItem.content
             }
 

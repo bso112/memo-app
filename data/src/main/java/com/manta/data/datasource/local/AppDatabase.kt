@@ -1,4 +1,4 @@
-package com.manta.data.source.local
+package com.manta.data.datasource.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

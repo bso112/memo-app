@@ -5,19 +5,19 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.manta.memo.R
 import com.manta.memo.data.Memo
 import com.manta.memo.databinding.ActivityCreatememoBinding
+import com.manta.memo.databinding.ActivityMainBinding
 import com.manta.memo.tools.app.AppActivity
 import com.manta.memo.util.AppUtil
 import javax.inject.Inject
 
-class CreateMemoActivity : AppActivity() {
+class CreateMemoActivity : AppActivity<ActivityCreatememoBinding>(R.layout.activity_creatememo) {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
     val viewModel: CreateMemoViewModel by viewModels { factory }
-
-    lateinit var binding: ActivityCreatememoBinding
 
     private var isUpdate = false
 
@@ -31,12 +31,11 @@ class CreateMemoActivity : AppActivity() {
             isUpdate = true
         }
 
-        binding = ActivityCreatememoBinding.inflate(layoutInflater)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-        binding.isUpdate = isUpdate
-
-        setContentView(binding.root)
+        binding {
+            lifecycleOwner = this@CreateMemoActivity
+            viewModel = this@CreateMemoActivity.viewModel
+            isUpdate = this@CreateMemoActivity.isUpdate
+        }
 
         viewModel.createMemoEvent.observe(this, Observer {
             setResult(RESULT_OK)
