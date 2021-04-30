@@ -2,39 +2,43 @@ package com.manta.memo.presentation.memo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.manta.domain.usecase.memoUsecase
+import com.manta.domain.usecase.*
 import com.manta.memo.data.Memo
 import com.manta.memo.data.mapper.toData
 import com.manta.memo.data.mapper.toMemo
 import com.manta.memo.tools.app.AppViewModel
 import com.manta.memo.tools.app.subscribeOnBackground
 import com.manta.memo.tools.app.subscribeWithDisposable
+import com.manta.memo.tools.app.toLiveData
 import com.manta.memo.util.AppSheetState
 import javax.inject.Inject
 
 class MemoViewModel @Inject constructor(
-    private val useCase: memoUsecase
+    private val deleteMemoUsecase: DeleteMemoUsecase,
+    private val getAllMemoUsecase: GetAllMemoUsecase
 ) : AppViewModel(), MemoAdapterDelegate{
 
     val createSheetState = MutableLiveData<AppSheetState>().apply {
         value = AppSheetState.STATE_COLLAPSED
     }
 
+
+
     private val _memoList = MutableLiveData<List<Memo>>()
-    val memoList : LiveData<List<Memo>> = _memoList
+    val memoList = _memoList.toLiveData()
 
     private val _onClickCreateMemoEvent = MutableLiveData<Unit>()
-    val onClickCreateMemoEvent : LiveData<Unit> = _onClickCreateMemoEvent
+    val onClickCreateMemoEvent = _onClickCreateMemoEvent.toLiveData()
 
     private val  _onClickMemoEvent = MutableLiveData<Memo>()
-    val onClickMemoEvent : LiveData<Memo> = _onClickMemoEvent
+    val onClickMemoEvent  = _onClickMemoEvent.toLiveData()
 
     private val _onLongClickMemoEvent = MutableLiveData<Memo>()
-    val onLongClickMemoEvent : LiveData<Memo> = _onLongClickMemoEvent
+    val onLongClickMemoEvent  = _onLongClickMemoEvent.toLiveData()
 
 
     fun getAll() {
-        useCase.getAll()
+        getAllMemoUsecase.getAllMemo()
             .subscribeOnBackground()
             .subscribeWithDisposable(this) {
                 _memoList.value = it.map { memo -> memo.toMemo() }
@@ -43,7 +47,7 @@ class MemoViewModel @Inject constructor(
 
 
     fun deleteMemo(memo : Memo){
-        useCase.deleteMemo(memo.toData())
+        deleteMemoUsecase.deleteMemo(memo.toData())
             .subscribeOnBackground()
             .subscribeWithDisposable(this){
 
