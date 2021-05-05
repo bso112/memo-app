@@ -42,6 +42,7 @@ class CreateMemoActivity : AppActivity<ActivityCreatememoBinding>(R.layout.activ
             finish()
         })
 
+
     }
 
 

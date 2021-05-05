@@ -1,4 +1,4 @@
-package com.manta.data.datasource.local
+package com.manta.data.datasource
 
 import androidx.room.*
 import com.manta.data.Entity.MemoEntity
@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 
 @Dao
-interface MemoDao {
+interface MemoDatasource {
     @Query("SELECT * FROM memo")
     fun getAll() : Single<List<MemoEntity>>
 

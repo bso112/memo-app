@@ -1,7 +1,7 @@
 package com.manta.memo.presentation.memo
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.manta.domain.data.UserData
 import com.manta.domain.usecase.*
 import com.manta.memo.data.Memo
 import com.manta.memo.data.mapper.toData
@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 class MemoViewModel @Inject constructor(
     private val deleteMemoUsecase: DeleteMemoUsecase,
-    private val getAllMemoUsecase: GetAllMemoUsecase
+    private val getAllMemoUsecase: GetAllMemoUsecase,
+    private val getUserUsecase: GetUserUsecase
 ) : AppViewModel(), MemoAdapterDelegate{
 
     val createSheetState = MutableLiveData<AppSheetState>().apply {
@@ -36,6 +37,11 @@ class MemoViewModel @Inject constructor(
     private val _onLongClickMemoEvent = MutableLiveData<Memo>()
     val onLongClickMemoEvent  = _onLongClickMemoEvent.toLiveData()
 
+    private val userData = MutableLiveData<UserData>()
+
+    fun getUserData(){
+        userData.value = getUserUsecase.getUser()
+    }
 
     fun getAll() {
         getAllMemoUsecase.getAllMemo()
@@ -69,6 +75,7 @@ class MemoViewModel @Inject constructor(
         _onClickCreateMemoEvent.value = Unit
         createSheetState.value = AppSheetState.STATE_COLLAPSED
     }
+
 
     override fun clickMemo(memo: Memo) {
         _onClickMemoEvent.value = memo
